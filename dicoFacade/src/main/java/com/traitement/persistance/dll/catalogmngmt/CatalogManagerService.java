@@ -24,7 +24,10 @@ public interface CatalogManagerService {
     
     List<Result> getAllResults();
 
-    public Result createResult(String file, String words, String key);
+    public Result createResult(String file, String echantillon, String key, Float tauxE, Float tauxC);
 
+    public Float testFile(List<Word> echantillon, Float tauxC);
+    
+    public Word retrieveWord(String word);
     
 }

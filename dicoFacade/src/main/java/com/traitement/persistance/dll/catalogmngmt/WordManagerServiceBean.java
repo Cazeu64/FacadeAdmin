@@ -83,8 +83,33 @@ public class WordManagerServiceBean {
         TypedQuery<Word> query = em.createQuery(q,Word.class);
         query.setParameter("pattern", pattern);
         List<Word> words = query.getResultList();
+          
+        
         return words;
      
+    }
+    
+    
+     /**
+     * retourner le mot correspondant à la recherche
+     * Comportement transactionnel redéfini (SUPPORTS)
+     * @param word le mot à trouver
+     * @return le mot trouvé
+     */ 
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS) //méthode pouvant joindre le contexte transactionnel de l'appelant
+    public Word findWord(String research) {
+        research = "'"+research+"'";
+        String q= "SELECT w From Word w where w.word = "+research;
+        TypedQuery<Word> query = em.createQuery(q,Word.class);
+        //query.setParameter("research", research);
+        List<Word> words = query.getResultList();
+          
+        if(words.isEmpty()){
+            return null;
+        }else{
+             return words.get(0);
+        }
+
     }
     
     

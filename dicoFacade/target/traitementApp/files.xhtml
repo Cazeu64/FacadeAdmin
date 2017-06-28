@@ -16,20 +16,28 @@
            <h:commandLink value="Retour Accueil" action="welcome"/>
         </h:form> 
        
-        <h:dataTable value="#{resultBean.results}" var ="f" rendered="#{resultBean.results.size()>0}">
+        <h:dataTable value="#{resultBean.results}" var ="r" rendered="#{resultBean.results.size()>0}">
             
             <h:column>
                 <!-- column header -->
                 <f:facet name="header">FileName</f:facet>
-                #{f.file} -
+                #{r.file} -
             </h:column>
             <h:column>
                 <f:facet name="header">Key</f:facet>
-                #{f.keyUsed} -
+                #{r.keyUsed} -
             </h:column>
             <h:column>
-                <f:facet name="header">Words</f:facet>
-                #{f.words}
+                <f:facet name="header">Echantillon</f:facet>
+                #{r.echantillon}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Taux Echantillonnage</f:facet>
+                #{r.tauxE}
+            </h:column>
+             <h:column>
+                <f:facet name="header">Taux Confiance</f:facet>
+                #{r.tauxR}
             </h:column>
         </h:dataTable> 
     </body>

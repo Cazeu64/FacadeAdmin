@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            fileName : <h:inputText value="#{resultBean.file}" />
+            <br/>      
+            words : <h:inputText value="#{resultBean.words}" />
+            <br/>
+            key : <h:inputText value="#{resultBean.keyUsed}" />
+            <br/>
+            taux echantillonage (0.5): <h:inputText value="#{resultBean.tauxE}" />
+            <br/>
+            taux validation (0.9): <h:inputText value="#{resultBean.tauxC}" />
+            <br/>
+            <h:commandButton value="Rechercher" actionListener="#{resultBean.testFile}"/> 
+        </h:form>
+        
+        <h:form>
+           <h:commandLink value="Retour Accueil" action="welcome"/>
+        </h:form> 
+        
+        
+        <h:panelGrid columns="2">
+            words : 
+            <h:outputText  value="#{resultBean.words}"/>
+            echantillon:
+            <h:outputText  value="#{resultBean.echantillon}"/>
+            taux echantillonnage
+            <h:outputText  value="#{resultBean.tauxE}"/>
+            taux confiance demandé
+            <h:outputText  value="#{resultBean.tauxC}"/>
+            taux confiance reel
+            <h:outputText  value="#{resultBean.seuil}"/>
+            resultat : 
+            <h:outputText  value="#{resultBean.isValid}"/>
+            
+        </h:panelGrid>  
+    </h:body>
+</html>
+

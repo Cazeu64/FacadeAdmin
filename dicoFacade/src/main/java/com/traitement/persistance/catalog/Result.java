@@ -6,8 +6,6 @@
 package com.traitement.persistance.catalog;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,25 +31,45 @@ public class Result implements Serializable {
     private String file;
     
     @Column(name="words")
-    private String words;
+    private String echantillon;
     
     @Column(name="keyUsed")
     private String keyUsed;
     
-    private List<Word> wordList;
+    @Column(name="tauxEchantillonnage")
+    private Float tauxE;     
+    
+    @Column(name="tauxConfiance")
+    private Float tauxR;
 
     public Result() {
         
     }
-    
+
 
     /******************/
     /* Geter / Setter */
     /******************/
+
     
-    public List<Word> getWordList() {
-        return wordList;
+    public Float getTauxE() {
+        return tauxE;
     }
+
+    public void setTauxE(Float tauxE) {
+        this.tauxE = tauxE;
+    }
+
+
+    public Float getTauxR() {
+        return tauxR;
+    }
+
+    public void setTauxR(Float tauxR) {
+        this.tauxR = tauxR;
+    }
+    
+    
 
     public Long getId() {
         return id;
@@ -62,8 +80,8 @@ public class Result implements Serializable {
         return file;
     }
 
-    public String getWords() {
-        return words;
+    public String getEchantillon() {
+        return echantillon;
     }
 
     public String getKeyUsed() {
@@ -78,17 +96,14 @@ public class Result implements Serializable {
         this.file = file;
     }
 
-    public void setWords(String words) {
-        this.words = words;
+    public void setEchantillon(String echantillon) {
+        this.echantillon = echantillon;
     }
 
     public void setKeyUsed(String key) {
-        this.keyUsed = keyUsed;
+        this.keyUsed = key;
     }
 
-    public void setWordList(List<Word> wordList) {
-        this.wordList = wordList;
-    }
     
      @Override
     public int hashCode() {
@@ -114,7 +129,7 @@ public class Result implements Serializable {
         if (!Objects.equals(this.file, other.file)) {
             return false;
         }
-        if (!Objects.equals(this.words, other.words)) {
+        if (!Objects.equals(this.echantillon, other.echantillon)) {
             return false;
         }
         if (!Objects.equals(this.keyUsed, other.keyUsed)) {
@@ -125,30 +140,9 @@ public class Result implements Serializable {
 
     @Override
     public String toString() {
-        return "Result{" + "id=" + id + ", file=" + file + ", words=" + words + ", key=" + keyUsed + '}';
+        return "Result{" + "id=" + id + ", file=" + file + ", words=" + echantillon + ", key=" + keyUsed + '}';
     }
 
-    
-    
-    /**
-     * @param words
-     * @return 
-    */
-    public List<Word> fillListFromString(String words){
-        
-        if(words == null){
-            return null;
-        }
-        
-        String[] list = words.split(",");
-        List<Word> wordsList = new ArrayList<>(); 
-        for (String l : list) {
-            Word w = new Word();
-            w.setWord(l);
-            wordsList.add(w);
-        }
-        return wordsList;
-    }
     
     
 }

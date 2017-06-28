@@ -1,10 +1,12 @@
 com\traitement\persistance\catalog\Word_.class
-com\traitement\persistance\dll\catalogmngmt\ResultManagerServiceBean.class
-com\traitement\persistance\catalog\Result.class
 com\traitement\persistance\dll\catalogmngmt\CatalogManagerServiceBean.class
 com\traitement\persistance\catalog\Result_.class
 com\traitement\persistance\catalog\Word.class
-com\traitement\model\WordBean.class
 com\traitement\model\ResultBean.class
-com\traitement\persistance\dll\catalogmngmt\CatalogManagerService.class
+com\traitement\persistance\catalog\TestFile.class
 com\traitement\persistance\dll\catalogmngmt\WordManagerServiceBean.class
+com\traitement\persistance\dll\catalogmngmt\ResultManagerServiceBean.class
+com\traitement\persistance\catalog\Result.class
+com\traitement\model\WordBean.class
+com\traitement\persistance\catalog\TestFile_.class
+com\traitement\persistance\dll\catalogmngmt\CatalogManagerService.class

@@ -56,6 +56,13 @@ public class CatalogManagerServiceBean implements CatalogManagerService {
         
         return wordObj;
     }
+    
+    /*
+    *
+    */
+    public Word retrieveWord(String word) {
+        return wordManager.findWord(word);
+    }
 
     
     /**
@@ -82,15 +89,42 @@ public class CatalogManagerServiceBean implements CatalogManagerService {
     }
 
     @Override
-    public Result createResult(String file, String words, String key) {
+    public Result createResult(String file, String echantillon, String key, Float tauxE, Float tauxR) {
         Result res = new Result();
         res.setFile(file);
         res.setKeyUsed(key);
-        res.setWords(words);
+        res.setEchantillon(echantillon);
+        res.setTauxE(tauxE);
+        res.setTauxR(tauxR);
         
         res = resultManager.saveResult(res); 
         
         return res;
+    }
+
+
+    @Override
+    public Float testFile(List<Word> echantillon, Float tauxC){
+        
+        int count = 0;
+        System.out.println("Taille echantillon : "+echantillon.size());
+        for(Word w :  echantillon){
+          
+           Word result = retrieveWord(w.getWord());
+           if(result != null){
+               count++;
+           }
+                   
+           System.out.println("Nombre de mot trouvés :"+count);
+        }
+        
+        System.out.println("Nombre de mot trouvés : "+count);
+        //ratio de mots trouvés en fr sur le nombre de mots dans la liste
+        Float ratio = Float.valueOf(count) / Float.valueOf(echantillon.size()) ;
+        System.out.println("Ratio mot trouvé / nbr de mots dans echantillon : "+ratio.toString());
+        float tauxReel = ratio * tauxC;
+        System.out.println("Taux de confiance reel :"+ tauxReel);
+        return tauxReel;
     }
 
    
