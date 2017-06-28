@@ -39,10 +39,10 @@ public class ResultBean implements Serializable{
     private String keyUsed;
     private Float tauxE;
     private Float tauxC;
+            
     private Float seuil;
-
     private Boolean isValid;
-
+ 
     
     /**
      * Initie la création d'un result
@@ -68,18 +68,38 @@ public class ResultBean implements Serializable{
         
         List<Word> e = getEchantillonFromFile();
         
-        seuil = catalogManager.testFile(e, tauxC);
-        if(seuil >= tauxC){
+        tauxC = catalogManager.testFile(e, seuil);
+        if(tauxC >= seuil){
             isValid = true;
+            catalogManager.createResult(file,echantillon,keyUsed,tauxE,tauxC);
+
+        }else{
+            isValid = false;
+        }
+        
+        
+        return "display";
+    }
+    
+    
+    public String testFileInList(){
+        
+        List<Word> e = getEchantillonFromFile();
+        
+        tauxC = catalogManager.testFileInList(e, seuil);
+        if(tauxC >= seuil){
+            isValid = true;
+            catalogManager.createResult(file,echantillon,keyUsed,tauxE,tauxC);
             
         }else{
             isValid = false;
         }
         
-        catalogManager.createResult(file,echantillon,keyUsed,tauxE,seuil);
+        
         
         return "display";
     }
+
   
      public List<Word> fillListFromString(){
         

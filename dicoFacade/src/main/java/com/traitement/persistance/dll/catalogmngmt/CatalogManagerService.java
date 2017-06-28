@@ -28,6 +28,9 @@ public interface CatalogManagerService {
 
     public Float testFile(List<Word> echantillon, Float tauxC);
     
+    public Float testFileInList(List<Word> echantillon, Float tauxC);
+    
     public Word retrieveWord(String word);
     
+    public List<String> getAllWords();
 }

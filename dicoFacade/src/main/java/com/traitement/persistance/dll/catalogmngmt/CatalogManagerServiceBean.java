@@ -39,6 +39,8 @@ public class CatalogManagerServiceBean implements CatalogManagerService {
     @EJB
     private ResultManagerServiceBean resultManager;
     
+    private List<String> listWords;
+    
     /**
     * Créer un nouveau mot<br>
     * Délègue le traitement à WordManager
@@ -79,6 +81,13 @@ public class CatalogManagerServiceBean implements CatalogManagerService {
         words.size();
         return words;
     }
+    
+    @Override
+    public List<String> getAllWords() {
+       List<String> results = wordManager.getAllWords();
+       results.size();
+       return results;
+    }
 
 
     @Override
@@ -112,6 +121,36 @@ public class CatalogManagerServiceBean implements CatalogManagerService {
           
            Word result = retrieveWord(w.getWord());
            if(result != null){
+               count++;
+           }
+                   
+           System.out.println("Nombre de mot trouvés :"+count);
+        }
+        
+        System.out.println("Nombre de mot trouvés : "+count);
+        //ratio de mots trouvés en fr sur le nombre de mots dans la liste
+        Float ratio = Float.valueOf(count) / Float.valueOf(echantillon.size()) ;
+        System.out.println("Ratio mot trouvé / nbr de mots dans echantillon : "+ratio.toString());
+        float tauxReel = ratio * tauxC;
+        System.out.println("Taux de confiance reel :"+ tauxReel);
+        return tauxReel;
+    }
+    
+    @Override
+    public Float testFileInList(List<Word> echantillon, Float tauxC){
+        
+        int count = 0;
+        System.out.println("Taille echantillon : "+echantillon.size());
+        
+        if(listWords == null){
+            System.out.println("Chargement de la liste de mots");
+            listWords = wordManager.getAllWords();
+        }
+        
+        for(Word w :  echantillon){
+           
+           if(listWords.contains(w.getWord())){
+         
                count++;
            }
                    

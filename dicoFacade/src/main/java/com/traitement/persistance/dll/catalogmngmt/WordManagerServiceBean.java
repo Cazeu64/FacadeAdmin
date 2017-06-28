@@ -6,7 +6,9 @@
 package com.traitement.persistance.dll.catalogmngmt;
 
 
+import com.traitement.persistance.catalog.Result;
 import com.traitement.persistance.catalog.Word;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PreDestroy;
 import javax.ejb.LocalBean;
@@ -89,6 +91,22 @@ public class WordManagerServiceBean {
      
     }
     
+    
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS) //méthode pouvant joindre le contexte transactionnel de l'appelant
+    public List<String> getAllWords() {
+        String q= "SELECT w FROM Word w";
+        TypedQuery<Word> query = em.createQuery(q,Word.class);
+       
+        List<Word> results = query.getResultList();
+        List<String> listWords = new ArrayList<>();
+        
+        for(Word w : results){
+            listWords.add(w.getWord());
+        }
+        return listWords;
+    }
+
+
     
      /**
      * retourner le mot correspondant à la recherche

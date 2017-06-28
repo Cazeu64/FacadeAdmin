@@ -42,6 +42,19 @@ public class WordBean implements Serializable {
     private Word wordObj;
     List<Word> words;
     
+    //charger tous les mots de la base en mémoire
+    private List<String> allWords;
+    
+    
+    
+    public List<String> loadWords(){
+     
+        allWords = catalogManager.getAllWords();
+        return allWords;
+    }
+    
+    
+    
      /**
      * Initie la création d'un mot
      * @return chaine de navigation
@@ -55,6 +68,9 @@ public class WordBean implements Serializable {
         //réinitialisation des variables
         wordId = null;
         word = null;
+        
+        //rechargement de la liste de mot
+        loadWords();
         
         return "display";
     }
